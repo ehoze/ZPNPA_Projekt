@@ -7,5 +7,5 @@ local.properties
 *.jks
 *.keystore
 .tools/
-artifacts/
+artifacts/*
 !artifacts/.gitkeep
