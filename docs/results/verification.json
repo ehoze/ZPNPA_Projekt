@@ -1,0 +1,227 @@
+{
+  "verified_on": "2026-11-20",
+  "unit_tests": [
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "polishTextSurvivesEncryption",
+      "seconds": 0.062,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "modifiedCiphertextIsRejected",
+      "seconds": 0.016,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "differentKeyIsRejected",
+      "seconds": 0.001,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "unknownVersionIsRejected",
+      "seconds": 0.001,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "truncatedFileIsRejected",
+      "seconds": 0.0,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveCipherTest",
+      "test": "repeatedEncryptionUsesDifferentIvs",
+      "seconds": 0.002,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "surroundingSpacesAreIgnored",
+      "seconds": 0.021,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "emptyOcrTextIsAllowed",
+      "seconds": 0.0,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "titleAtLimitIsAllowed",
+      "seconds": 0.0,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "largeTextIsRejected",
+      "seconds": 0.003,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "polishSearchIsCaseAndAccentInsensitive",
+      "seconds": 0.013,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "wildcardCharactersAreEscaped",
+      "seconds": 0.003,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "titleAboveLimitIsRejected",
+      "seconds": 0.0,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.DocumentRulesTest",
+      "test": "blankTitleIsRejected",
+      "seconds": 0.002,
+      "passed": true
+    }
+  ],
+  "instrumented_tests": [
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveIntegrationTest",
+      "test": "sqlSearchTreatsPercentAndUnderscoreLiterally",
+      "seconds": 0.255,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ArchiveIntegrationTest",
+      "test": "scanOcrEncryptedPersistenceSearchExportAndDelete",
+      "seconds": 1.504,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.NavigationTest",
+      "test": "querySurvivesSettingsNavigationAndActivityRecreation",
+      "seconds": 3.956,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenTest",
+      "test": "editorRejectsBlankTitleAndThenSavesCorrectedData",
+      "seconds": 2.42,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenTest",
+      "test": "searchHasAnExplicitEmptyResult",
+      "seconds": 0.767,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenTest",
+      "test": "editorRestoresUnsavedTitleAfterRecreation",
+      "seconds": 1.354,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenTest",
+      "test": "emptyArchiveStartsScanningAndOpensSettings",
+      "seconds": 1.013,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenshotTest",
+      "test": "editor",
+      "seconds": 0.995,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenshotTest",
+      "test": "archive",
+      "seconds": 0.889,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenshotTest",
+      "test": "settings",
+      "seconds": 0.842,
+      "passed": true
+    },
+    {
+      "class": "pl.edu.zpnpa.skaner.ScreenshotTest",
+      "test": "details",
+      "seconds": 1.11,
+      "passed": true
+    }
+  ],
+  "lint": [
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "GradleDependency",
+      "severity": "Warning"
+    },
+    {
+      "id": "NewerVersionAvailable",
+      "severity": "Warning"
+    },
+    {
+      "id": "NewerVersionAvailable",
+      "severity": "Warning"
+    },
+    {
+      "id": "NewerVersionAvailable",
+      "severity": "Warning"
+    }
+  ],
+  "apk": {
+    "file": "Skaner-1.0.apk",
+    "bytes": 83791256,
+    "sha256": "eb820995b96f83e60c6aa3a0fbee0acb2bca5dcf958226524205edb4e333a3f6"
+  },
+  "emulator": "Android 16 API 36.1, isolated x86_64 AVD",
+  "physical_device": "Motorola razr 50 ultra, Android 17",
+  "physical_scan_and_ocr": "Confirmed by the user"
+}

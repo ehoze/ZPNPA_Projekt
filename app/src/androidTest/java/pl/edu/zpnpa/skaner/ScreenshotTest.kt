@@ -5,6 +5,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.*
+import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Rule
 import org.junit.Test
@@ -22,6 +24,7 @@ class ScreenshotTest {
         compose.setContent { ScannerTheme {
             ArchiveScreen(listOf(document), "", false, null, {}, {}, {}, {}, {})
         } }
+        compose.onNodeWithText("Twoje dokumenty").assertIsDisplayed()
         capture("01-archiwum")
     }
     @Test fun details() {
@@ -29,14 +32,19 @@ class ScreenshotTest {
             DetailScreen(DocumentDetails(document, listOf(PageEntity("demo", 0, "fixture"))),
                 {}, {}, {}, {}, {}, { photo() })
         } }
+        compose.waitUntil(5_000) {
+            compose.onAllNodesWithContentDescription("Podgląd strony 1").fetchSemanticsNodes().isNotEmpty()
+        }
         capture("02-dokument")
     }
     @Test fun editor() {
         compose.setContent { ScannerTheme { EditScreen(document, {}, { _, _ -> }) } }
+        compose.onNodeWithText("Nazwa dokumentu").assertIsDisplayed()
         capture("03-edycja")
     }
     @Test fun settings() {
         compose.setContent { ScannerTheme { SettingsScreen(false, {}, {}) } }
+        compose.onNodeWithText("Prywatność").assertIsDisplayed()
         capture("04-ustawienia")
     }
 
@@ -44,7 +52,7 @@ class ScreenshotTest {
         compose.waitForIdle()
         val instrumentation = InstrumentationRegistry.getInstrumentation()
         val root = File(instrumentation.targetContext.getExternalFilesDir(null), "screenshots").apply { mkdirs() }
-        val screenshot = checkNotNull(instrumentation.uiAutomation.takeScreenshot())
+        val screenshot = compose.onRoot().captureToImage().asAndroidBitmap()
         File(root, "$name.png").outputStream().use { screenshot.compress(Bitmap.CompressFormat.PNG, 100, it) }
         screenshot.recycle()
     }
