@@ -3,6 +3,7 @@ package pl.edu.zpnpa.skaner
 import androidx.compose.ui.test.*
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.junit4.StateRestorationTester
+import androidx.test.espresso.Espresso.closeSoftKeyboard
 import org.junit.Assert.*
 import org.junit.Rule
 import org.junit.Test
@@ -20,7 +21,7 @@ class ScreenTest {
             ArchiveScreen(emptyList(), "", false, null, {}, { scans++ }, { settings++ }, {}, {})
         } }
         compose.onNodeWithText("Zacznij od pierwszego skanu").assertIsDisplayed()
-        compose.onNodeWithText("Skanuj dokument").performClick()
+        compose.onNodeWithText("Skanuj dokument", useUnmergedTree = true).performClick()
         compose.onNodeWithContentDescription("Ustawienia").performClick()
         assertEquals(1, scans)
         assertEquals(1, settings)
@@ -30,10 +31,12 @@ class ScreenTest {
         var saved: Pair<String, String>? = null
         compose.setContent { ScannerTheme { EditScreen(document, {}) { title, text -> saved = title to text } } }
         compose.onNodeWithText("Nazwa dokumentu").performTextReplacement(" ")
+        closeSoftKeyboard()
         compose.onNodeWithText("Zapisz zmiany").performScrollTo().performClick()
         compose.onNodeWithText("Wpisz nazwę dokumentu.").assertExists()
         assertNull(saved)
-        compose.onNodeWithText("Nazwa dokumentu").performTextReplacement("Internet")
+        compose.onNodeWithText("Nazwa dokumentu").performScrollTo().performTextReplacement("Internet")
+        closeSoftKeyboard()
         compose.onNodeWithText("Zapisz zmiany").performScrollTo().performClick()
         assertEquals("Internet", saved?.first)
     }

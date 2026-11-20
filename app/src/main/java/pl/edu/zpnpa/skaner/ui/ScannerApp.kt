@@ -3,6 +3,8 @@ package pl.edu.zpnpa.skaner.ui
 import android.graphics.Bitmap
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -309,31 +311,25 @@ fun EditScreen(document: DocumentEntity, onBack: () -> Unit, onSave: (String, St
     Scaffold(topBar = {
         TopAppBar(title = { Text("Edycja dokumentu") }, navigationIcon = { BackButton(leave) })
     }) { padding ->
-        LazyColumn(Modifier.fillMaxSize().padding(padding).imePadding().widthIn(max = 760.dp),
-            contentPadding = PaddingValues(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
-            item {
+        Column(Modifier.fillMaxSize().padding(padding).imePadding().widthIn(max = 760.dp)
+            .verticalScroll(rememberScrollState()).padding(20.dp), verticalArrangement = Arrangement.spacedBy(18.dp)) {
+            Column {
                 Text("Nadaj nazwę i popraw tekst", style = MaterialTheme.typography.titleLarge)
                 Text("Zmiany zapiszą się w archiwum i będą dostępne w wyszukiwaniu.",
                     Modifier.padding(top = 6.dp), color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            item {
-                OutlinedTextField(title, { title = it.take(DocumentRules.MAX_TITLE + 1) },
+            OutlinedTextField(title, { title = it.take(DocumentRules.MAX_TITLE + 1) },
                     modifier = Modifier.fillMaxWidth(), label = { Text("Nazwa dokumentu") }, singleLine = true,
                     isError = titleError != null,
                     supportingText = { Text(titleError ?: "${title.trim().length}/${DocumentRules.MAX_TITLE}") })
-            }
-            item {
-                OutlinedTextField(text, { text = it.take(DocumentRules.MAX_TEXT + 1) },
+            OutlinedTextField(text, { text = it.take(DocumentRules.MAX_TEXT + 1) },
                     modifier = Modifier.fillMaxWidth(), label = { Text("Tekst dokumentu") },
                     minLines = 8, maxLines = 14, isError = textError != null,
                     supportingText = { Text(textError ?: "Wynik OCR możesz poprawić ręcznie.") })
-            }
-            item {
-                Button(onClick = {
+            Button(onClick = {
                     submitted = true
                     if (DocumentRules.titleError(title) == null && DocumentRules.textError(text) == null) onSave(title, text)
                 }, modifier = Modifier.fillMaxWidth()) { Text("Zapisz zmiany") }
-            }
         }
     }
     if (confirmDiscard) ConfirmDialog("Odrzucić zmiany?", "Niezapisane poprawki zostaną utracone.", "Odrzuć",
